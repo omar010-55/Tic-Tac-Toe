@@ -20,13 +20,13 @@ const GameBoard = function() {
   const getBoard = () => board;
 
   const putMark = (player, row, column) => {
-    let isFalse
-    const falseCheck = () => isFalse
-    if(board[row][column].getValue() !== 0) {  // Check if the move is valid
-      isFalse = true
-      return
+    if(board[row][column].getValue() !== 0) {  // Check if the move is valid and return true or false for the turn switch
+      console.log("Bad Move!")
+      return false
+    } else {
+      board[row][column].addMark(player) // Assign the move
+      return true
     }
-    board[row][column].addMark(player)  // Assign the move
   }
 
   const printBoard = () => {
@@ -70,12 +70,10 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
 
   const playRound = (row, column) => {
 
-    board.putMark(getActivePlayer().mark, row, column)
-
-    if(putMark.isFalse === true) {
-      console.log("Wrong play try again")
-      return
+    if(board.putMark(getActivePlayer().mark, row, column) === false) {
+      return console.log(`player ${getActivePlayer().name} turn Again`)
     }
+    
 
     switchActivePlayer()
     printNewRound()
@@ -106,4 +104,5 @@ function Cell() {
 }
   //
 
-// gameController.playRound(0,2)
+// gameController.playRound(0,0)
+// gameController.playRound(0,0)
