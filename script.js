@@ -75,6 +75,28 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     }
     
 
+
+    // Check the win condition
+
+    let ourBoard = board.getBoard()
+
+    for(let i = 0; i < ourBoard.length; i++) {
+      if(ourBoard[i][0].getValue() === ourBoard[i][1].getValue() && ourBoard[i][1].getValue() === ourBoard[i][2].getValue() && ourBoard[i][2].getValue() !== 0) {  // Check the winner in rows
+        console.log(`${getActivePlayer().name} is the winner`)
+        return
+      }
+      if(ourBoard[0][i].getValue() === ourBoard[1][i].getValue() && ourBoard[1][i].getValue() === ourBoard[2][i].getValue() && ourBoard[2][i].getValue() !== 0) {  // Check the winner in columns
+        console.log(`${getActivePlayer().name} is the winner`)
+        return
+      }
+    }
+
+    if(ourBoard[0][0].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][2].getValue() && ourBoard[1][1].getValue() !== 0 || (ourBoard[0][2].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][0].getValue() && ourBoard[1][1].getValue() !== 0)) {  // Check the winner in scissors
+      console.log(`${getActivePlayer().name} is the winner`)
+      return
+    }
+
+
     switchActivePlayer()
     printNewRound()
   }
@@ -106,3 +128,13 @@ function Cell() {
 
 // gameController.playRound(0,0)
 // gameController.playRound(0,0)
+
+// gameController.playRound(0,0)
+
+// gameController.playRound(0,1)
+
+// gameController.playRound(1,1) 
+
+// gameController.playRound(1,2)
+
+// gameController.playRound(2,2)
