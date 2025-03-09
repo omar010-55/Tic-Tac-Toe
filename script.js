@@ -68,31 +68,46 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     console.log(`${getActivePlayer().name}'s turn.`)
   }
 
+  const theWinner = function() {  // If there is a winner the game will not play
+    let winner = false
+    const thereIsWinnner = () => winner = getActivePlayer().name
+    const getWinner = () => winner
+    return {thereIsWinnner, getWinner}
+  }()
+
   const playRound = (row, column) => {
 
-    if(board.putMark(getActivePlayer().mark, row, column) === false) {
+
+    if(theWinner.getWinner() !== false) {
+      return console.log("the Game Is Over Start New Game?")
+    }
+
+    if(board.putMark(getActivePlayer().mark, row, column) === false && theWinner.getWinner() === false) {
       return console.log(`player ${getActivePlayer().name} turn Again`)
     }
     
-
 
     // Check the win condition
 
     let ourBoard = board.getBoard()
 
+
     for(let i = 0; i < ourBoard.length; i++) {
       if(ourBoard[i][0].getValue() === ourBoard[i][1].getValue() && ourBoard[i][1].getValue() === ourBoard[i][2].getValue() && ourBoard[i][2].getValue() !== 0) {  // Check the winner in rows
         console.log(`${getActivePlayer().name} is the winner`)
+        theWinner.thereIsWinnner()
         return
       }
       if(ourBoard[0][i].getValue() === ourBoard[1][i].getValue() && ourBoard[1][i].getValue() === ourBoard[2][i].getValue() && ourBoard[2][i].getValue() !== 0) {  // Check the winner in columns
         console.log(`${getActivePlayer().name} is the winner`)
+        theWinner.thereIsWinnner()
         return
       }
     }
 
-    if(ourBoard[0][0].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][2].getValue() && ourBoard[1][1].getValue() !== 0 || (ourBoard[0][2].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][0].getValue() && ourBoard[1][1].getValue() !== 0)) {  // Check the winner in scissors
+    if(ourBoard[0][0].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][2].getValue() && ourBoard[1][1].getValue() !== 0 || ourBoard[0][2].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][0].getValue() && ourBoard[1][1].getValue() !== 0) {  // Check the winner in scissors
       console.log(`${getActivePlayer().name} is the winner`)
+      theWinner.thereIsWinnner()
       return
     }
 
