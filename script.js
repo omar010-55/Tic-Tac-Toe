@@ -8,12 +8,15 @@ const GameBoard = function() {
   // Add rows and columns and cells , check if the play is wrong and assign the square
   const rows = 3
   const columns = 3
-  for(let i = 0; i < rows; i++) {
-    board[i] = []
-    for(let j = 0; j < columns; j++) {
-      board[i].push(Cell())
+  const resetGame = function() {
+    for(let i = 0; i < rows; i++) {
+      board[i] = []
+      for(let j = 0; j < columns; j++) {
+        board[i].push(Cell())
+      }
     }
   }
+  resetGame()
   //
 
 
@@ -33,8 +36,9 @@ const GameBoard = function() {
     const getBoardValue = board.map((row) => row.map((column) => column.getValue()))
     console.log(getBoardValue)
   }
-
-  return {getBoard, putMark, printBoard}
+ 
+ 
+  return {getBoard, putMark, printBoard, resetGame}
 }()
   //
 
