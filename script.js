@@ -8,7 +8,7 @@ const GameBoard = function() {
   // Add rows and columns and cells , check if the play is wrong and assign the square
   const rows = 3
   const columns = 3
-  const resetGame = function() {
+  const resetBoard = function() {
     for(let i = 0; i < rows; i++) {
       board[i] = []
       for(let j = 0; j < columns; j++) {
@@ -16,7 +16,7 @@ const GameBoard = function() {
       }
     }
   }
-  resetGame()
+  resetBoard()
   //
 
 
@@ -38,7 +38,7 @@ const GameBoard = function() {
   }
  
  
-  return {getBoard, putMark, printBoard, resetGame}
+  return {getBoard, putMark, printBoard, resetBoard}
 }()
   //
 
@@ -76,8 +76,15 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     let winner = false
     const thereIsWinnner = () => winner = getActivePlayer().name
     const getWinner = () => winner
-    return {thereIsWinnner, getWinner}
+    const reset = () => winner = false
+    return {thereIsWinnner, getWinner, reset}
   }()
+
+      // Reset the game
+      const resetGame = function() {
+        board.resetBoard()
+        theWinner.reset()
+      }
 
   const playRound = (row, column) => {
 
@@ -120,7 +127,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     printNewRound()
   }
 
-  return {playRound, getActivePlayer}
+  return {playRound, getActivePlayer, resetGame}
 }()
 
 
