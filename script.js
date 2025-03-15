@@ -86,6 +86,65 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
         theWinner.reset()
       }
 
+
+    // Test
+
+    const winFunc = function() {
+      board.getBoard().map((row) => { // Check if the win in rows
+        let all = 0
+        for(let i = 1; i < row.length; i++) {
+          if(row[0].getValue() !== 0 && row[0].getValue() === row[i].getValue()) {
+            all += 1 
+          }
+        }
+        if(all === 2) {
+          let win = theWinner.thereIsWinnner()
+          console.log(`${win} is the winner ffff`)
+          return
+        }
+      })
+      for(let j = 0; j < board.getBoard().length; j++) { // 0 - 2 Check if the win in vertical
+        let vertical = 0
+        for(let k = 1; k < 3; k++) {
+          if(board.getBoard()[0][j].getValue() !== 0 && board.getBoard()[0][j].getValue() === board.getBoard()[k][j].getValue()) {
+            vertical += 1
+          }
+          if(vertical === 2) {
+            let win = theWinner.thereIsWinnner()
+            console.log(`${win} is the winner ffff cv`)
+            return
+          }
+        }
+      }
+      let sc = 0
+      for(let i = 0; i < 2; i++) {  // Check if win diagonally
+        if(board.getBoard()[i][i].getValue() !== 0 && board.getBoard()[i][i].getValue() === board.getBoard()[i+1][i+1].getValue()) {
+          sc += 1
+        }
+        // if(board.getBoard()[i][0].getValue() !== 0 && board.getBoard()[j][j].getValue() === board.getBoard()[j+1][j+1].getValue())
+      }
+      if(sc === 2) {
+        let win = theWinner.thereIsWinnner()
+        console.log(`${win} is the winner ffff sc`)
+        return
+      }
+      let count = 0
+      for(let i = 2; i > 0; i--) {
+        for(let j = 0; j < 2; j++) {
+          if(board.getBoard()[i][j].getValue() !== 0 && board.getBoard()[i][j].getValue() === board.getBoard()[i-1][j+1].getValue()) {
+            count += 1
+          }
+        }
+      }
+      if(count === 2) {
+        let win = theWinner.thereIsWinnner()
+        console.log(`${win} is the winner ffff sc`)
+        return
+      }
+    }
+    //
+
+
   const playRound = (row, column) => {
 
 
@@ -102,26 +161,28 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
 
     let ourBoard = board.getBoard()
 
+    winFunc()
 
-    for(let i = 0; i < ourBoard.length; i++) {
-      if(ourBoard[i][0].getValue() === ourBoard[i][1].getValue() && ourBoard[i][1].getValue() === ourBoard[i][2].getValue() && ourBoard[i][2].getValue() !== 0) {  // Check the winner in rows
-        console.log(`${getActivePlayer().name} is the winner`)
-        theWinner.thereIsWinnner()
-        return
-      }
-      if(ourBoard[0][i].getValue() === ourBoard[1][i].getValue() && ourBoard[1][i].getValue() === ourBoard[2][i].getValue() && ourBoard[2][i].getValue() !== 0) {  // Check the winner in columns
-        console.log(`${getActivePlayer().name} is the winner`)
-        theWinner.thereIsWinnner()
-        return
-      }
-    }
+    // for(let i = 0; i < ourBoard.length; i++) {
+    //   if(ourBoard[i][0].getValue() === ourBoard[i][1].getValue() && ourBoard[i][1].getValue() === ourBoard[i][2].getValue() && ourBoard[i][2].getValue() !== 0) {  // Check the winner in rows
+    //     console.log(`${getActivePlayer().name} is the winner`)
+    //     theWinner.thereIsWinnner()
+    //     return
+    //   }
+    //   if(ourBoard[0][i].getValue() === ourBoard[1][i].getValue() && ourBoard[1][i].getValue() === ourBoard[2][i].getValue() && ourBoard[2][i].getValue() !== 0) {  // Check the winner in columns
+    //     console.log(`${getActivePlayer().name} is the winner`)
+    //     theWinner.thereIsWinnner()
+    //     return
+    //   }
+    // }
 
-    if(ourBoard[0][0].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][2].getValue() && ourBoard[1][1].getValue() !== 0 || ourBoard[0][2].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][0].getValue() && ourBoard[1][1].getValue() !== 0) {  // Check the winner in scissors
-      console.log(`${getActivePlayer().name} is the winner`)
-      theWinner.thereIsWinnner()
-      return
-    }
+    // if(ourBoard[0][0].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][2].getValue() && ourBoard[1][1].getValue() !== 0 || ourBoard[0][2].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][0].getValue() && ourBoard[1][1].getValue() !== 0) {  // Check the winner in scissors
+    //   console.log(`${getActivePlayer().name} is the winner`)
+    //   theWinner.thereIsWinnner()
+    //   return
+    // }
 
+    if(theWinner.getWinner() !== false) return
 
     switchActivePlayer()
     printNewRound()
@@ -163,4 +224,16 @@ function Cell() {
 
 // gameController.playRound(1,2)
 
+// gameController.playRound(2,2)
+
+// gameController.playRound(0,0)
+// gameController.playRound(1,0)
+// gameController.playRound(0,1)
+// gameController.playRound(1,1)
+// gameController.playRound(0,2)
+
+// gameController.playRound(0,2)
+// gameController.playRound(1,0)
+// gameController.playRound(1,2)
+// gameController.playRound(2,0)
 // gameController.playRound(2,2)
