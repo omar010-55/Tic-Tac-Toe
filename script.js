@@ -84,6 +84,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
       const resetGame = function() {
         board.resetBoard()
         theWinner.reset()
+        resetCount()
       }
 
 
@@ -129,12 +130,12 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
         return
       }
       let count = 0
-      for(let i = 2; i > 0; i--) {
-        for(let j = 0; j < 2; j++) {
-          if(board.getBoard()[i][j].getValue() !== 0 && board.getBoard()[i][j].getValue() === board.getBoard()[i-1][j+1].getValue()) {
+      let erhamni = 2
+      for(let i = 0; i < 2; i++) {
+          if(board.getBoard()[erhamni][i].getValue() !== 0 && board.getBoard()[erhamni][i].getValue() === board.getBoard()[erhamni-1][i+1].getValue()) {
             count += 1
-          }
-        }
+            erhamni -= 1
+          } else {erhamni -= 1}
       }
       if(count === 2) {
         let win = theWinner.thereIsWinnner()
@@ -144,6 +145,10 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     }
     //
 
+    let roundBeingPlayed = 0  // Count round
+    const countRound = () => roundBeingPlayed = roundBeingPlayed + 1
+    const getRound = () => roundBeingPlayed
+    const resetCount = () => roundBeingPlayed = 0
 
   const playRound = (row, column) => {
 
@@ -183,6 +188,13 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     // }
 
     if(theWinner.getWinner() !== false) return
+
+    countRound()
+
+    if(getRound() === 9) {
+      console.log("Tie Tie Tie")
+      return
+    }
 
     switchActivePlayer()
     printNewRound()
@@ -237,3 +249,13 @@ function Cell() {
 // gameController.playRound(1,2)
 // gameController.playRound(2,0)
 // gameController.playRound(2,2)
+
+// gameController.playRound(0,0)
+// gameController.playRound(0,1)
+// gameController.playRound(0,2)
+// gameController.playRound(1,0)
+// gameController.playRound(1,2)
+// gameController.playRound(1,1)
+// gameController.playRound(2,1)
+// gameController.playRound(2,2)
+// gameController.playRound(2,0)
