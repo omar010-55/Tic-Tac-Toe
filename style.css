@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 12px;
+  font-family: sans-serif;
+}
+
+.container {
+  text-align: center;
+}
+
+.container header {
+  padding: 20px 0;
+}
+
+header h1 {
+  font-size: 6em;
+  margin-bottom: 20px;
+}
+
+header p {
+  font-size: 3em;
+}
+
+.play {
+  display: grid;
+  width: 45rem;
+  border: 10px solid;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  aspect-ratio: 1;
+  display: none;
+}
+
+.cell {
+  background-color: #2196F3;
+  border: 5px solid gold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 140px;
+}
+
+button {
+  width: 6rem;
+  height: 2rem;
+  border: none;
+  background-color: coral;
+  color: white;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.box {
+  width: 30rem;
+  height: 15rem;
+  background-color: antiquewhite;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.box p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box label {
+
+}
+
+input {
+
+}
+
+.box button {
+
+}

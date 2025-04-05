@@ -150,6 +150,9 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     const getRound = () => roundBeingPlayed
     const resetCount = () => roundBeingPlayed = 0
 
+    
+
+
   const playRound = (row, column) => {
 
 
