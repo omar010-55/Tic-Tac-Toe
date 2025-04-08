@@ -150,7 +150,25 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     const getRound = () => roundBeingPlayed
     const resetCount = () => roundBeingPlayed = 0
 
-    
+    // the Display
+    const play = document.querySelector(".play")
+    const turn = document.querySelector("#turn")
+    const result = document.querySelector("#result")
+
+    const display = function() {
+      play.innerHTML = ""
+      board.getBoard().map((row) => row.map((column) => {
+        let value = column.getValue()
+        if (value === 0) {
+          // const node = `<div class="cell"></div>`
+          play.innerHTML += `<div class="cell"></div>`
+        } else {
+          // const node = `<div class="cell">${value}</div>`
+          play.innerHTML += `<div class="cell">${value}</div>`
+        }
+      }))
+      
+    }
 
 
   const playRound = (row, column) => {
@@ -203,7 +221,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     printNewRound()
   }
 
-  return {playRound, getActivePlayer, resetGame}
+  return {playRound, getActivePlayer, resetGame, display}
 }()
 
 

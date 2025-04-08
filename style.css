@@ -33,8 +33,9 @@ header p {
   margin: 0 auto;
   margin-bottom: 20px;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   aspect-ratio: 1;
-  display: none;
+  /* display: none; */
 }
 
 .cell {
@@ -64,6 +65,7 @@ button {
   background-color: antiquewhite;
   margin: 0 auto;
   padding: 25px;
+  display: none;
 }
 
 .box p {
