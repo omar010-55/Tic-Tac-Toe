@@ -1,5 +1,6 @@
 :root {
-  --hidden: none;
+  --showing: none;
+  /* display: none; */
 }
 
 * {
@@ -28,6 +29,11 @@ header h1 {
 
 header p {
   font-size: 3em;
+  display: var(--showing);
+}
+
+#layer {
+  display: var(--showing);
 }
 
 .play {
@@ -39,7 +45,10 @@ header p {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   aspect-ratio: 1;
-  /* display: none; */
+}
+
+.buttons {
+  display: var(--showing);
 }
 
 .cell {

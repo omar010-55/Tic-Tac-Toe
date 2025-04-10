@@ -234,9 +234,39 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
 }()
 
 
+const r = document.querySelector(':root')
+
+const layer = document.getElementById("layer")
+
+const box = document.querySelector('.box')
+
 const newgame = document.getElementById("newgame")
+
 const restart = document.getElementById("restart")
-restart.addEventListener("click", gameController.resetGame)  
+
+const gameStarter = document.getElementById("gameStarter")
+
+newgame.addEventListener('click', function() { // Removing the playground and showing the start menu
+  r.style.setProperty('--showing', 'none')
+  box.style.setProperty('display', 'initial')
+})
+
+function theMain() { // Showing the playground and Hide the Menu
+  r.style.setProperty('--showing', 'initial')
+  box.style.setProperty('display', 'none')
+}
+
+gameStarter.addEventListener('click', theMain)
+
+
+restart.addEventListener("click", gameController.resetGame)
+
+
+
+
+
+
+
 
 // const game = function() {
 
