@@ -85,7 +85,10 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
         board.resetBoard()
         theWinner.reset()
         resetCount()
+        activePlayer = players[0]
+        display()
       }
+
 
 
     // Test
@@ -101,7 +104,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
         if(all === 2) {
           let win = theWinner.thereIsWinnner()
           console.log(`${win} is the winner ffff`)
-          return
+          return turn.textContent = `${win} is the winner 11`
         }
       })
       for(let j = 0; j < board.getBoard().length; j++) { // 0 - 2 Check if the win in vertical
@@ -113,7 +116,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
           if(vertical === 2) {
             let win = theWinner.thereIsWinnner()
             console.log(`${win} is the winner ffff cv`)
-            return
+            return turn.textContent = `${win} is the winner 22`
           }
         }
       }
@@ -127,7 +130,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
       if(sc === 2) {
         let win = theWinner.thereIsWinnner()
         console.log(`${win} is the winner ffff sc`)
-        return
+        return turn.textContent = `${win} is the winner 33`
       }
       let count = 0
       let erhamni = 2
@@ -140,7 +143,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
       if(count === 2) {
         let win = theWinner.thereIsWinnner()
         console.log(`${win} is the winner ffff sc`)
-        return
+        return turn.textContent = `${win} is the winner 44`
       }
     }
     //
@@ -156,6 +159,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     const result = document.querySelector("#result")
 
     const display = function() {
+
       play.innerHTML = ""
       board.getBoard().map((row) => row.map((column) => {
         let value = column.getValue()
@@ -167,6 +171,8 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
           play.innerHTML += `<div class="cell">${value}</div>`
         }
       }))
+
+      turn.textContent = `${getActivePlayer().name} Turn`
       
     }
 
@@ -214,18 +220,23 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
 
     if(getRound() === 9) {
       console.log("Tie Tie Tie")
-      return
+      display()
+      return turn.textContent = `its a tie`
     }
 
+    
     switchActivePlayer()
     printNewRound()
+    display()
   }
 
   return {playRound, getActivePlayer, resetGame, display}
 }()
 
 
-
+const newgame = document.getElementById("newgame")
+const restart = document.getElementById("restart")
+restart.addEventListener("click", gameController.resetGame)  
 
 // const game = function() {
 
