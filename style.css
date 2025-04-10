@@ -79,7 +79,6 @@ button {
   background-color: antiquewhite;
   margin: 0 auto;
   padding: 83px;
-  display: none;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
