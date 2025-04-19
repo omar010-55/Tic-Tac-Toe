@@ -87,6 +87,9 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
         resetCount()
         activePlayer = players[0]
         display()
+
+        realPlayerOne = ''
+        realPlayerTwo = ''
       }
 
 
@@ -231,8 +234,11 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
   }
 
   return {playRound, getActivePlayer, resetGame, display}
-}()
+}
 
+
+const playerOneInput = document.getElementById("playerOne")
+const playerTwoInput = document.getElementById("playerTwo")
 
 const r = document.querySelector(':root')
 
@@ -251,27 +257,35 @@ newgame.addEventListener('click', function() { // Removing the playground and sh
   box.style.setProperty('display', 'initial')
 })
 
-function theMain() { // Showing the playground and Hide the Menu
+let realPlayerOne = ''
+let realPlayerTwo = ''
+
+
+function theMain(event) { // Showing the playground and Hide the Menu
+  event.preventDefault()
+  gameController().resetGame()
   r.style.setProperty('--showing', 'initial')
   box.style.setProperty('display', 'none')
+  if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
+    console.log(playerOneInput.value === '')
+    realPlayerOne = playerOneInput.value
+    realPlayerTwo = playerTwoInput.value
+    gameController(playerOneInput.value,playerTwoInput.value)
+  }
+  box.reset()
 }
 
 gameStarter.addEventListener('click', theMain)
 
 
-restart.addEventListener("click", gameController.resetGame)
+restart.addEventListener("click", gameController().resetGame)
 
 
-
-
-
-
-
-
-// const game = function() {
-
-// }
-  //
+function dgg(event) {
+  if(realPlayerOne !== '' && realPlayerTwo !== '') {
+    gameController(realPlayerOne,realPlayerTwo).playRound(1,0)
+  }
+}
 
   // the cell in every square
 function Cell() {
