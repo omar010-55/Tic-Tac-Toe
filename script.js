@@ -36,12 +36,11 @@ const GameBoard = function() {
     const getBoardValue = board.map((row) => row.map((column) => column.getValue()))
     console.log(getBoardValue)
   }
- 
- 
   return {getBoard, putMark, printBoard, resetBoard}
 }()
   //
 
+  const play = document.querySelector(".play") // LOL
 
 const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo") {
   const board = GameBoard
@@ -106,8 +105,8 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
         }
         if(all === 2) {
           let win = theWinner.thereIsWinnner()
-          console.log(`${win} is the winner ffff`)
-          return turn.textContent = `${win} is the winner 11`
+          console.log(`${win} is the winner`)
+          return turn.textContent = `${win} is the winner`
         }
       })
       for(let j = 0; j < board.getBoard().length; j++) { // 0 - 2 Check if the win in vertical
@@ -118,8 +117,8 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
           }
           if(vertical === 2) {
             let win = theWinner.thereIsWinnner()
-            console.log(`${win} is the winner ffff cv`)
-            return turn.textContent = `${win} is the winner 22`
+            console.log(`${win} is the winner`)
+            return turn.textContent = `${win} is the winner`
           }
         }
       }
@@ -128,12 +127,11 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
         if(board.getBoard()[i][i].getValue() !== 0 && board.getBoard()[i][i].getValue() === board.getBoard()[i+1][i+1].getValue()) {
           sc += 1
         }
-        // if(board.getBoard()[i][0].getValue() !== 0 && board.getBoard()[j][j].getValue() === board.getBoard()[j+1][j+1].getValue())
       }
       if(sc === 2) {
         let win = theWinner.thereIsWinnner()
-        console.log(`${win} is the winner ffff sc`)
-        return turn.textContent = `${win} is the winner 33`
+        console.log(`${win} is the winner`)
+        return turn.textContent = `${win} is the winner`
       }
       let count = 0
       let erhamni = 2
@@ -145,8 +143,8 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
       }
       if(count === 2) {
         let win = theWinner.thereIsWinnner()
-        console.log(`${win} is the winner ffff sc`)
-        return turn.textContent = `${win} is the winner 44`
+        console.log(`${win} is the winner`)
+        return turn.textContent = `${win} is the winner`
       }
     }
     //
@@ -157,21 +155,27 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     const resetCount = () => roundBeingPlayed = 0
 
     // the Display
-    const play = document.querySelector(".play")
+    
     const turn = document.querySelector("#turn")
     const result = document.querySelector("#result")
 
     const display = function() {
 
+      let Counter = 0
+      let Column = 0
+      let Row = 0
+
       play.innerHTML = ""
       board.getBoard().map((row) => row.map((column) => {
         let value = column.getValue()
         if (value === 0) {
-          // const node = `<div class="cell"></div>`
-          play.innerHTML += `<div class="cell"></div>`
+          play.innerHTML += `<div class="cell" data-row="${Row}" data-column="${Column}"></div>`
+          Column = Column + 1
+          if(Column === 3) {Column = 0; Row = Row + 1}
         } else {
-          // const node = `<div class="cell">${value}</div>`
-          play.innerHTML += `<div class="cell">${value}</div>`
+          play.innerHTML += `<div class="cell" data-row="${Row}" data-column="${Column}">${value}</div>`
+          Column = Column + 1
+          if(Column === 3) {Column = 0; Row = Row + 1}
         }
       }))
 
@@ -195,27 +199,8 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
     // Check the win condition
 
     let ourBoard = board.getBoard()
-
+    display()
     winFunc()
-
-    // for(let i = 0; i < ourBoard.length; i++) {
-    //   if(ourBoard[i][0].getValue() === ourBoard[i][1].getValue() && ourBoard[i][1].getValue() === ourBoard[i][2].getValue() && ourBoard[i][2].getValue() !== 0) {  // Check the winner in rows
-    //     console.log(`${getActivePlayer().name} is the winner`)
-    //     theWinner.thereIsWinnner()
-    //     return
-    //   }
-    //   if(ourBoard[0][i].getValue() === ourBoard[1][i].getValue() && ourBoard[1][i].getValue() === ourBoard[2][i].getValue() && ourBoard[2][i].getValue() !== 0) {  // Check the winner in columns
-    //     console.log(`${getActivePlayer().name} is the winner`)
-    //     theWinner.thereIsWinnner()
-    //     return
-    //   }
-    // }
-
-    // if(ourBoard[0][0].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][2].getValue() && ourBoard[1][1].getValue() !== 0 || ourBoard[0][2].getValue() === ourBoard[1][1].getValue() && ourBoard[1][1].getValue() === ourBoard[2][0].getValue() && ourBoard[1][1].getValue() !== 0) {  // Check the winner in scissors
-    //   console.log(`${getActivePlayer().name} is the winner`)
-    //   theWinner.thereIsWinnner()
-    //   return
-    // }
 
     if(theWinner.getWinner() !== false) return
 
@@ -234,7 +219,7 @@ const gameController = function(playerOne = "playerOne", playerTwo = "playerTwo"
   }
 
   return {playRound, getActivePlayer, resetGame, display}
-}
+}// problem
 
 
 const playerOneInput = document.getElementById("playerOne")
@@ -257,33 +242,36 @@ newgame.addEventListener('click', function() { // Removing the playground and sh
   box.style.setProperty('display', 'initial')
 })
 
-let realPlayerOne = ''
-let realPlayerTwo = ''
-
-
+let realPlayerOne 
+let realPlayerTwo //465465
+  let creatGameControler
+  
 function theMain(event) { // Showing the playground and Hide the Menu
   event.preventDefault()
-  gameController().resetGame()
+  
   r.style.setProperty('--showing', 'initial')
   box.style.setProperty('display', 'none')
   if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
-    console.log(playerOneInput.value === '')
+    console.log(playerOneInput.value)
     realPlayerOne = playerOneInput.value
     realPlayerTwo = playerTwoInput.value
-    gameController(playerOneInput.value,playerTwoInput.value)
-  }
+    creatGameControler = gameController(realPlayerOne, realPlayerTwo)
+  } else {creatGameControler = gameController()}
+  creatGameControler.resetGame()
   box.reset()
 }
 
 gameStarter.addEventListener('click', theMain)
 
 
-restart.addEventListener("click", gameController().resetGame)
+restart.addEventListener("click", () => {
+  creatGameControler.resetGame()
+})
 
 
 function dgg(event) {
   if(realPlayerOne !== '' && realPlayerTwo !== '') {
-    gameController(realPlayerOne,realPlayerTwo).playRound(1,0)
+    creatGameControler.playRound(1,0)
   }
 }
 
@@ -299,39 +287,17 @@ function Cell() {
 
   return {addMark, getValue}
 }
-  //
 
-// gameController.playRound(0,0)
-// gameController.playRound(0,0)
 
-// gameController.playRound(0,0)
 
-// gameController.playRound(0,1)
+play.addEventListener("click", (e) => {
+  console.log(e.target.getAttribute("data-column"))
+  let theRow = e.target.getAttribute("data-row");
+  let theColumn = e.target.getAttribute("data-column");
 
-// gameController.playRound(1,1) 
-
-// gameController.playRound(1,2)
-
-// gameController.playRound(2,2)
-
-// gameController.playRound(0,0)
-// gameController.playRound(1,0)
-// gameController.playRound(0,1)
-// gameController.playRound(1,1)
-// gameController.playRound(0,2)
-
-// gameController.playRound(0,2)
-// gameController.playRound(1,0)
-// gameController.playRound(1,2)
-// gameController.playRound(2,0)
-// gameController.playRound(2,2)
-
-// gameController.playRound(0,0)
-// gameController.playRound(0,1)
-// gameController.playRound(0,2)
-// gameController.playRound(1,0)
-// gameController.playRound(1,2)
-// gameController.playRound(1,1)
-// gameController.playRound(2,1)
-// gameController.playRound(2,2)
-// gameController.playRound(2,0)
+  if(realPlayerOne !== '' && realPlayerTwo !== '') {
+    creatGameControler.playRound(+theRow, +theColumn)
+  } else {
+    creatGameControler.playRound(+theRow, +theColumn)
+  }
+})
